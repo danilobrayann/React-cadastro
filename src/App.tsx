@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import People from './assets/pessoas.svg';
 import Arrow from './assets/flecha.svg';
 import lixo from './assets/lixo.svg';
@@ -23,27 +23,25 @@ interface Pessoa {
 
 const App: React.FC = () => {
   const [users, setUsers] = useState<Pessoa[]>([]);
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
+  const inputName = useRef<HTMLInputElement>(null);
+  const inputAge = useRef<HTMLInputElement>(null);
 
   function addNewUser() {
-    const newUser: Pessoa = {
-      id: Math.random(),
-      name: name,
-      age: parseInt(age)
-    };
+    const name = inputName.current?.value;
+    const age = inputAge.current?.value;
 
-    setUsers([...users, newUser]);
-    setName('');
-    setAge('');
-  }
+    if (name && age) {
+      const newUser: Pessoa = {
+        id: Math.random(),
+        name: name,
+        age: parseInt(age)
+      };
 
-  function changeInputName(event: React.ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
-  }
+      setUsers([...users, newUser]);
 
-  function changeInputAge(event: React.ChangeEvent<HTMLInputElement>) {
-    setAge(event.target.value);
+      inputName.current.value = '';
+      inputAge.current.value = '';
+    }
   }
 
   function deleteUser(id: number) {
@@ -57,10 +55,10 @@ const App: React.FC = () => {
       <ContainerIntes>
         <H1>Olá</H1>
         <InputLabel>Nome</InputLabel>
-        <Input onChange={changeInputName} value={name} placeholder="nome" />
+        <Input ref={inputName} placeholder="nome" />
 
         <InputLabel>Idade</InputLabel>
-        <Input onChange={changeInputAge} value={age} placeholder="idade" />
+        <Input ref={inputAge} placeholder="idade" />
 
         <Button onClick={addNewUser}>
           Cadastrar <ImgFlecha src={Arrow} alt="seta" />
