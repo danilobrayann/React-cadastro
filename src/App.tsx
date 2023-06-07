@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import People from './assets/pessoas.svg';
 import Arrow from './assets/flecha.svg';
-import lixo from './assets/lixo.svg'
+import lixo from './assets/lixo.svg';
 
 import {
   Container,
@@ -12,7 +12,7 @@ import {
   Input,
   Button,
   ImgFlecha,
-  User, 
+  User
 } from './styles';
 
 interface Pessoa {
@@ -20,12 +20,36 @@ interface Pessoa {
   name: string;
   age: number;
 }
-//Jsx
+
 const App: React.FC = () => {
-  const users: Pessoa[] = [
-    { id: Math.random(), name: 'Danilo', age: 26 },
-    { id: Math.random(), name: 'Maria', age: 20 },
-  ];
+  const [users, setUsers] = useState<Pessoa[]>([]);
+  const [name, setName] = useState('');
+  const [age, setAge] = useState('');
+
+  function addNewUser() {
+    const newUser: Pessoa = {
+      id: Math.random(),
+      name: name,
+      age: parseInt(age)
+    };
+
+    setUsers([...users, newUser]);
+    setName('');
+    setAge('');
+  }
+
+  function changeInputName(event: React.ChangeEvent<HTMLInputElement>) {
+    setName(event.target.value);
+  }
+
+  function changeInputAge(event: React.ChangeEvent<HTMLInputElement>) {
+    setAge(event.target.value);
+  }
+
+  function deleteUser(id: number) {
+    const updatedUsers = users.filter(user => user.id !== id);
+    setUsers(updatedUsers);
+  }
 
   return (
     <Container>
@@ -33,21 +57,24 @@ const App: React.FC = () => {
       <ContainerIntes>
         <H1>Olá</H1>
         <InputLabel>Nome</InputLabel>
-        <Input placeholder="nome" />
+        <Input onChange={changeInputName} value={name} placeholder="nome" />
 
         <InputLabel>Idade</InputLabel>
-        <Input placeholder="idade" />
+        <Input onChange={changeInputAge} value={age} placeholder="idade" />
 
-        <Button>
-          Cadastra <ImgFlecha src={Arrow} alt="seta" />
+        <Button onClick={addNewUser}>
+          Cadastrar <ImgFlecha src={Arrow} alt="seta" />
         </Button>
+
         <ul>
-          {users.map((user) => (
+          {users.map(user => (
             <User key={user.id}>
-              <p>{user.name}</p>  <p>{user.age}</p>
-            <button><img src={lixo} alt="lata de lixo" /></button>
-              
-              </User>
+              <p>{user.name}</p>
+              <p>{user.age}</p>
+              <button onClick={() => deleteUser(user.id)}>
+                <img src={lixo} alt="lata de lixo" />
+              </button>
+            </User>
           ))}
         </ul>
       </ContainerIntes>
@@ -56,3 +83,4 @@ const App: React.FC = () => {
 };
 
 export default App;
+
