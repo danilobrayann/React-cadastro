@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios';
+
 import People from './assets/pessoas.svg';
 import Arrow from './assets/flecha.svg';
 import lixo from './assets/lixo.svg';
@@ -26,22 +28,15 @@ const App: React.FC = () => {
   const inputName = useRef<HTMLInputElement>(null);
   const inputAge = useRef<HTMLInputElement>(null);
 
-  function addNewUser() {
-    const name = inputName.current?.value;
-    const age = inputAge.current?.value;
+  async function addNewUser() {
 
-    if (name && age) {
-      const newUser: Pessoa = {
-        id: Math.random(),
-        name: name,
-        age: parseInt(age)
-      };
+    const { data: newUser } = await axios.post('http://localhost:5000/users', { name: inputName.current?.value, age: inputAge.current?.value })
 
-      setUsers([...users, newUser]);
 
-      inputName.current.value = '';
-      inputAge.current.value = '';
-    }
+    setUsers([...users, newUser]);
+
+    console.log(newUser)
+
   }
 
   function deleteUser(id: number) {
