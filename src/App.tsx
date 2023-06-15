@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 
 import People from './assets/pessoas.svg';
@@ -30,14 +30,32 @@ const App: React.FC = () => {
 
   async function addNewUser() {
 
-    const { data: newUser } = await axios.post('http://localhost:5000/users', { name: inputName.current?.value, age: inputAge.current?.value })
+    //criando novos usuario
+   const { data: newUser } = await axios.post('http://localhost:5000/users', { name: inputName.current?.value, age: inputAge.current?.value })
 
+   setUsers([...users, newUser]);
 
-    setUsers([...users, newUser]);
-
-    console.log(newUser)
+  
 
   }
+   // assim que carregar a pagina o useEffect será chamado
+   // ou quando está no arrey de dependencias
+  // espera dois paramentro, uma function e um arrey
+  useEffect(()=>{
+
+    async function CadastroUser (){
+
+ //mostrando meu usuario cadastrado
+ const {data: UpdateUsers} = await axios.get('http://localhost:5000/users')
+
+ setUsers(UpdateUsers)
+
+    } 
+
+    CadastroUser ()
+
+  },[])
+
 
   function deleteUser(id: number) {
     const updatedUsers = users.filter(user => user.id !== id);
