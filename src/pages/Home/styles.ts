@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import fundo from './assets/backgraoud.svg'
+import fundo from '../../assets/backgraoud.svg'
 
 export const Container = styled.div`
 background:url('${fundo}' );
@@ -90,6 +90,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 gap:20px;
+margin-top:132px;
 
 &:hover{
     opacity:0.8;
@@ -102,32 +103,4 @@ gap:20px;
 export const ImgFlecha = styled.img`
 
 `
-export const User = styled.li`
-display:flex;
-justify-content:space-around;
-align-items:center;
-height:50px;
-width:342;
-background: rgba(255, 255, 255, 0.25);
-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-border-radius: 14px;
-border:none;
-outline:none;
-margin-bottom:25px;
-margin-top:25px;
 
-p{
-font-style: normal;
-font-weight: 400;
-font-size: 20px;
-line-height: 28px;
-color: #FFFFFF;
-}
-
-button{
-    background:none;
-    border:none;
-    cursor: pointer;
-}
-
-`

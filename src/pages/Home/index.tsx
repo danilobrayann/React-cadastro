@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, } from 'react';
 import axios from 'axios';
 
-import People from './assets/pessoas.svg';
-import Arrow from './assets/flecha.svg';
-import lixo from './assets/lixo.svg';
+import People from '../../assets/pessoas.svg';
+import Arrow from '../../assets/flecha.svg';
+
 
 import {
   Container,
@@ -14,7 +14,6 @@ import {
   Input,
   Button,
   ImgFlecha,
-  User
 } from './styles';
 
 interface Pessoa {
@@ -38,29 +37,10 @@ const App: React.FC = () => {
   
 
   }
-   // assim que carregar a pagina o useEffect será chamado
-   // ou quando está no arrey de dependencias
-  // espera dois paramentro, uma function e um arrey
-  useEffect(()=>{
-
-    async function CadastroUser (){
-
- //mostrando meu usuario cadastrado
- const {data: UpdateUsers} = await axios.get('http://localhost:5000/users')
-
- setUsers(UpdateUsers)
-
-    } 
-
-    CadastroUser ()
-
-  },[])
+   
 
 
-  function deleteUser(id: number) {
-    const updatedUsers = users.filter(user => user.id !== id);
-    setUsers(updatedUsers);
-  }
+
 
   return (
     <Container>
@@ -77,17 +57,6 @@ const App: React.FC = () => {
           Cadastrar <ImgFlecha src={Arrow} alt="seta" />
         </Button>
 
-        <ul>
-          {users.map(user => (
-            <User key={user.id}>
-              <p>{user.name}</p>
-              <p>{user.age}</p>
-              <button onClick={() => deleteUser(user.id)}>
-                <img src={lixo} alt="lata de lixo" />
-              </button>
-            </User>
-          ))}
-        </ul>
       </ContainerIntes>
     </Container>
   );
