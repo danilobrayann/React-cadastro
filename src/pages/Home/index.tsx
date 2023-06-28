@@ -53,10 +53,10 @@ const App: React.FC = () => {
         <InputLabel>Idade</InputLabel>
         <Input ref={inputAge} placeholder="idade" />
 
-        <Button onClick={addNewUser}>
+        <Button to="/usuarios" onClick={addNewUser}>
           Cadastrar <ImgFlecha src={Arrow} alt="seta" />
         </Button>
-
+        
       </ContainerIntes>
     </Container>
   );

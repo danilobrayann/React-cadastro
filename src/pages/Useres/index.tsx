@@ -66,7 +66,7 @@ const Users: React.FC = () => {
           ))}
         </ul>
 
-        <Button >
+        <Button to="/" >
         <ImgFlecha src={Arrow} alt="seta" /> Voltar 
         </Button>
 

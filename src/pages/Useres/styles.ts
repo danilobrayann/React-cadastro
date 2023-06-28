@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import fundo from '../../assets/backgraound1.svg'
-
+import { Link } from 'react-router-dom';
 export const Container = styled.div`
 background:url('${fundo}' );
 background-size:cover;
@@ -44,7 +44,7 @@ margin-bottom:80px;
 
 
 
-export const Button = styled.button`
+export const Button = styled(Link)`
 
 width: 342px;
 height: 74px;
@@ -58,7 +58,7 @@ font-style: normal;
 font-weight: 700;
 font-size: 17px;
 line-height: 28px;
-
+text-decoration:none;
 display:flex;
 align-items:center;
 justify-content:center;
