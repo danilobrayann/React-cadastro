@@ -1,4 +1,4 @@
-import React from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home"
@@ -8,8 +8,8 @@ function MyRoutes() {
     return (
         <Router>
             <Routes>
-            <Route  path="/" Component={Home} />
-            <Route path="/usuarios" Component={Usuarios} />
+            <Route  path="/" element={<Home/>} />
+            <Route path="/usuarios" element={<Usuarios/>} />
             </Routes>
         </Router>
 

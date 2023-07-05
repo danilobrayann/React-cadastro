@@ -4,10 +4,10 @@ import axios from 'axios';
 import People from '../../assets/pessoas.svg';
 import Arrow from '../../assets/flecha.svg';
 
+import { H1 } from '../../components/Title/styles';
 
 import {
   Container,
-  H1,
   Imagem,
   ContainerIntes,
   InputLabel,
